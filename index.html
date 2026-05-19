@@ -1,0 +1,273 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Praedicta — For Those Who See</title>
+  <meta name="description" content="Praedicta — premium crypto identity. Minimal, cinematic visuals." />
+  <style>
+    :root{
+      --bg:#0A0A0A;
+      --purple:#7C00FF;
+      --electric:#00F0FF;
+      --gold:#FFD700;
+      --muted:#8a8a8a;
+      --card-bg: rgba(255,255,255,0.02);
+      --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --radius:12px;
+      --max-width:1100px;
+      --ff: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#050505);
+      color:#fff;
+      font-family:var(--ff);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:36px 20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+
+    /* HERO */
+    .hero{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      overflow:hidden;
+      position:relative;
+      min-height:520px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    /* video cover */
+    .hero video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter: saturate(1.05) contrast(1.05);
+      transform:translateZ(0);
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(10,10,10,0.15), rgba(10,10,10,0.5));
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      padding:48px;
+      width:100%;
+      display:flex;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eye-card{
+      width:240px;
+      height:240px;
+      border-radius:20px;
+      background:radial-gradient(circle at 30% 30%, rgba(124,0,255,0.08), transparent 25%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 30px rgba(124,0,255,0.08);
+      border:1px solid rgba(255,255,255,0.03);
+      margin-right:20px;
+      flex:0 0 auto;
+    }
+
+    .eye-card img{ width:70%; height:70%; object-fit:contain; filter: drop-shadow(0 6px 18px rgba(124,0,255,0.14)); }
+
+    .hero-copy{
+      color:#fff;
+      flex:1 1 auto;
+      min-width:0;
+    }
+    .kicker{
+      display:inline-block;
+      color:var(--gold);
+      font-weight:600;
+      letter-spacing:0.08em;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,215,0,0.06);
+      margin-bottom:12px;
+    }
+    h1{
+      margin:0 0 12px 0;
+      font-size:36px;
+      line-height:1.02;
+      letter-spacing:0.02em;
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size:15px;
+      max-width:48ch;
+    }
+
+    .cta-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:10px;
+      background:linear-gradient(90deg,var(--purple), #5b00ff);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow: 0 8px 30px rgba(124,0,255,0.18);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .btn.alt{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--electric);
+      font-weight:600;
+    }
+
+    /* RIGHT COLUMN */
+    .sidebar{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .card{
+      background:var(--card-bg);
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.03);
+      min-height:80px;
+    }
+    .card h4{ margin:0 0 8px 0; font-size:13px; color:var(--gold) }
+    .small{ font-size:13px; color:var(--muted) }
+
+    /* gallery / icons */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    .avatar{
+      background:rgba(255,255,255,0.012);
+      border-radius:10px;
+      padding:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:68px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .avatar img{ width:48px; height:48px; object-fit:contain; }
+
+    /* footer */
+    footer{
+      grid-column:1 / -1;
+      margin-top:20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* responsive */
+    @media (max-width:980px){
+      .container{ grid-template-columns:1fr; }
+      .hero{ min-height:420px; }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <section class="hero" aria-label="Hero">
+      <!-- Replace 'eye_loop.mp4' with your MP4 filename in the same repo -->
+      <video autoplay muted loop playsinline poster="hero-poster.jpg" aria-hidden="true">
+        <source src="eye_loop.mp4" type="video/mp4">
+      </video>
+
+      <div class="hero-inner">
+        <div class="eye-card" aria-hidden="true">
+          <!-- Replace with your square icon file -->
+          <img src="icons/eye_icon.png" alt="">
+        </div>
+
+        <div class="hero-copy">
+          <span class="kicker">Praedicta</span>
+          <h1>PRAEDICTA — For Those Who See</h1>
+          <p class="lead">Premium crypto identity and visuals. Minimal, cinematic, and designed for clarity — predict, hold, see.</p>
+
+          <div class="cta-row">
+            <a class="btn" href="assets/Praedicta-pack.zip" download>Download Assets</a>
+            <a class="btn alt" href="#gallery">View Icons</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar" aria-label="Sidebar">
+      <div class="card">
+        <h4>Quick Preview</h4>
+        <div class="small">Use the looped hero animation (eye_loop.mp4) for headers. Place the small gold tagline "FOR THOSE WHO SEE" subtly.</div>
+      </div>
+
+      <div class="card" id="gallery">
+        <h4>Profile Icons</h4>
+        <div class="grid" aria-hidden="false">
+          <!-- Replace these with your generated 1:1 PNGs -->
+          <div class="avatar"><img src="icons/eye_cosmic.png" alt="cosmic eye"></div>
+          <div class="avatar"><img src="icons/eye_circuit.png" alt="circuit eye"></div>
+          <div class="avatar"><img src="icons/eye_flame.png" alt="flame eye"></div>
+          <div class="avatar"><img src="icons/eye_crystal.png" alt="crystal eye"></div>
+          <div class="avatar"><img src="icons/eye_clock.png" alt="clockwork eye"></div>
+          <div class="avatar"><img src="icons/eye_light.png" alt="white light eye"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Assets</h4>
+        <div class="small">Place SVGs, PNGs, and MP4/GIF files in the repo root or an /assets folder. Use the downloadable pack for web-ready sizes.</div>
+      </div>
+    </aside>
+
+    <footer>
+      Praedicta PRAE — 777,777 • For Those Who See
+    </footer>
+  </main>
+
+  <!-- Optional tiny script: enable click-to-play on mobile if autoplay blocked -->
+  <script>
+    (function(){
+      const vid = document.querySelector('video');
+      if(!vid) return;
+      // some browsers block autoplay with sound; ensure muted
+      vid.muted = true;
+      vid.setAttribute('muted','');
+      vid.play().catch(()=>{ /* user interaction required */ });
+    })();
+  </script>
+</body>
+</html>
