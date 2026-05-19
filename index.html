@@ -1,4 +1,6 @@
+**Adjusting HTML for stripes**
 
+The user wants the HTML adjusted for a vertical stripes background similar to the image they provided. I won't directly identify that image, but I need to create an updated `index.html` that includes a CSS pattern for those stripes. I should continue with the code block format as previously, without additional commentary. The CSS will feature small stripes with colors like purple, gold, electric blue, and dark tones. Let’s produce that code!```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,12 +11,15 @@
   <style>
     :root{
       --bg:#0A0A0A;
+      --stripe-dark:#0b0b0b;
+      --stripe-purple:#2d0b4f;
+      --stripe-gold:#b88600;
+      --stripe-blue:#00f0ff;
       --purple:#7C00FF;
       --electric:#00F0FF;
       --gold:#FFD700;
-      --muted:#8a8a8a;
+      --muted:#9a98a0;
       --card-bg: rgba(255,255,255,0.02);
-      --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       --radius:12px;
       --max-width:1100px;
       --ff: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -23,86 +28,100 @@
     html,body{height:100%}
     body{
       margin:0;
-      background:linear-gradient(180deg,var(--bg),#050505);
-      color:#fff;
       font-family:var(--ff);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      padding:36px 20px;
-    }
-
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:28px;
-      align-items:start;
-    }
-
-    /* HERO */
-    .hero{
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      overflow:hidden;
-      position:relative;
-      min-height:520px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-      display:flex;
       align-items:center;
       justify-content:center;
+      padding:28px;
+      background:var(--bg);
+      color:#fff;
     }
-    /* video cover */
-    .hero video{
-      position:absolute;
-      inset:0;
+
+    /*
+      Vertical stripe background similar to user's reference.
+      Uses a repeating-linear-gradient to create thin multicolor stripes.
+      Adjust the stripe-width and colors to taste.
+    */
+    .page-bg{
       width:100%;
-      height:100%;
-      object-fit:cover;
-      filter: saturate(1.05) contrast(1.05);
-      transform:translateZ(0);
+      max-width:1200px;
+      min-height:640px;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.7);
+      position:relative;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          var(--stripe-dark) 0,
+          var(--stripe-dark) 4px,
+          var(--stripe-purple) 4px,
+          var(--stripe-purple) 5px,
+          var(--stripe-gold) 5px,
+          var(--stripe-gold) 6px,
+          var(--stripe-blue) 6px,
+          var(--stripe-blue) 7px
+        ),
+        linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      padding:28px;
     }
-    .hero::after{
-      content:"";
+
+    /* semi-transparent overlay so content reads on top of stripes */
+    .overlay {
       position:absolute;
       inset:0;
-      background: linear-gradient(180deg, rgba(10,10,10,0.15), rgba(10,10,10,0.5));
+      background: linear-gradient(180deg, rgba(10,10,10,0.25), rgba(10,10,10,0.6));
       pointer-events:none;
     }
 
-    .hero-inner{
+    /* layout */
+    .hero{
       position:relative;
-      z-index:2;
-      padding:48px;
-      width:100%;
+      border-radius:12px;
+      padding:28px;
+      min-height:560px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
       display:flex;
-      gap:28px;
+      gap:20px;
       align-items:center;
+      overflow:hidden;
+      z-index:2;
     }
 
-    .eye-card{
-      width:240px;
-      height:240px;
-      border-radius:20px;
-      background:radial-gradient(circle at 30% 30%, rgba(124,0,255,0.08), transparent 25%);
+    .hero-left{
+      flex:1 1 auto;
+      min-width:0;
+    }
+
+    .eye-box{
+      width:260px;
+      height:260px;
+      border-radius:18px;
+      background: radial-gradient(circle at 30% 30%, rgba(124,0,255,0.08), transparent 25%);
       display:flex;
       align-items:center;
       justify-content:center;
       box-shadow: 0 10px 30px rgba(124,0,255,0.08);
       border:1px solid rgba(255,255,255,0.03);
-      margin-right:20px;
       flex:0 0 auto;
+      margin-right:22px;
+    }
+    .eye-box img{ width:72%; height:72%; object-fit:contain; filter: drop-shadow(0 8px 24px rgba(0,240,255,0.12)); }
+
+    .hero-head{
+      display:flex;
+      align-items:flex-start;
+      gap:18px;
     }
 
-    .eye-card img{ width:70%; height:70%; object-fit:contain; filter: drop-shadow(0 6px 18px rgba(124,0,255,0.14)); }
-
-    .hero-copy{
+    .copy{
       color:#fff;
-      flex:1 1 auto;
-      min-width:0;
     }
     .kicker{
       display:inline-block;
@@ -113,22 +132,17 @@
       padding:6px 10px;
       border-radius:999px;
       background:rgba(255,215,0,0.06);
-      margin-bottom:12px;
+      margin-bottom:8px;
     }
     h1{
-      margin:0 0 12px 0;
-      font-size:36px;
+      margin:0 0 10px 0;
+      font-size:34px;
       line-height:1.02;
       letter-spacing:0.02em;
     }
-    p.lead{
-      margin:0 0 18px 0;
-      color:var(--muted);
-      font-size:15px;
-      max-width:48ch;
-    }
+    p.lead{ margin:0 0 14px 0; color:var(--muted); max-width:56ch; }
 
-    .cta-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .cta-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:10px; }
     .btn{
       display:inline-flex;
       align-items:center;
@@ -139,7 +153,7 @@
       color:#fff;
       text-decoration:none;
       font-weight:600;
-      box-shadow: 0 8px 30px rgba(124,0,255,0.18);
+      box-shadow: 0 10px 36px rgba(124,0,255,0.18);
       border:1px solid rgba(255,255,255,0.03);
     }
     .btn.alt{
@@ -149,24 +163,23 @@
       font-weight:600;
     }
 
-    /* RIGHT COLUMN */
-    .sidebar{
-      position:relative;
+    /* right column */
+    .side{
       display:flex;
       flex-direction:column;
       gap:18px;
+      z-index:2;
     }
     .card{
-      background:var(--card-bg);
-      padding:18px;
-      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:16px;
+      border-radius:12px;
       border:1px solid rgba(255,255,255,0.03);
-      min-height:80px;
+      min-height:76px;
     }
     .card h4{ margin:0 0 8px 0; font-size:13px; color:var(--gold) }
     .small{ font-size:13px; color:var(--muted) }
 
-    /* gallery / icons */
     .grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -184,60 +197,69 @@
     }
     .avatar img{ width:48px; height:48px; object-fit:contain; }
 
-    /* footer */
     footer{
+      position:relative;
+      z-index:2;
       grid-column:1 / -1;
-      margin-top:20px;
+      margin-top:18px;
       text-align:center;
       color:var(--muted);
-      font-size:13px;
+      width:100%;
     }
 
-    /* responsive */
+    /* small decorative glints to match striped feel */
+    .glint {
+      position:absolute;
+      top:18px;
+      left:18px;
+      width:44px;
+      height:44px;
+      border-radius:9px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+      transform:rotate(12deg);
+      z-index:1;
+    }
+
     @media (max-width:980px){
-      .container{ grid-template-columns:1fr; }
-      .hero{ min-height:420px; }
+      .page-bg{ grid-template-columns: 1fr; padding:18px; min-height:760px; }
+      .hero{ min-height:420px; padding:18px; }
+      .eye-box{ display:none; }
     }
-
   </style>
 </head>
 <body>
-  <main class="container" role="main">
-    <section class="hero" aria-label="Hero">
-      <!-- Replace 'eye_loop.mp4' with your MP4 filename in the same repo -->
-      <video autoplay muted loop playsinline poster="hero-poster.jpg" aria-hidden="true">
-        <source src="eye_loop.mp4" type="video/mp4">
-      </video>
+  <div class="page-bg" role="main" aria-label="Praedicta hero area">
+    <div class="overlay" aria-hidden="true"></div>
 
-      <div class="hero-inner">
-        <div class="eye-card" aria-hidden="true">
-          <!-- Replace with your square icon file -->
+    <div class="hero" aria-label="Hero">
+      <div class="hero-head" style="display:flex; align-items:center;">
+        <div class="eye-box" aria-hidden="true">
+          <!-- replace with your icon -->
           <img src="icons/eye_icon.png" alt="">
         </div>
 
-        <div class="hero-copy">
-          <span class="kicker">Praedicta</span>
-          <h1>PRAEDICTA — For Those Who See</h1>
-          <p class="lead">Premium crypto identity and visuals. Minimal, cinematic, and designed for clarity — predict, hold, see.</p>
+        <div class="hero-left">
+          <div class="copy">
+            <div class="kicker">Praedicta</div>
+            <h1>PRAEDICTA — For Those Who See</h1>
+            <p class="lead">Minimal, cinematic crypto branding. Use the looped eye animation and high-contrast icons for headers, avatars, and promos.</p>
 
-          <div class="cta-row">
-            <a class="btn" href="assets/Praedicta-pack.zip" download>Download Assets</a>
-            <a class="btn alt" href="#gallery">View Icons</a>
+            <div class="cta-row">
+              <a class="btn" href="assets/Praedicta-pack.zip" download>Download Pack</a>
+              <a class="btn alt" href="#icons">View Icons</a>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <aside class="sidebar" aria-label="Sidebar">
-      <div class="card">
-        <h4>Quick Preview</h4>
-        <div class="small">Use the looped hero animation (eye_loop.mp4) for headers. Place the small gold tagline "FOR THOSE WHO SEE" subtly.</div>
-      </div>
+      <!-- small decorative glint -->
+      <div class="glint" aria-hidden="true"></div>
+    </div>
 
-      <div class="card" id="gallery">
-        <h4>Profile Icons</h4>
+    <aside class="side" aria-label="Sidebar">
+      <div class="card" id="icons">
+        <h4>Icons</h4>
         <div class="grid" aria-hidden="false">
-          <!-- Replace these with your generated 1:1 PNGs -->
           <div class="avatar"><img src="icons/eye_cosmic.png" alt="cosmic eye"></div>
           <div class="avatar"><img src="icons/eye_circuit.png" alt="circuit eye"></div>
           <div class="avatar"><img src="icons/eye_flame.png" alt="flame eye"></div>
@@ -248,26 +270,38 @@
       </div>
 
       <div class="card">
-        <h4>Assets</h4>
-        <div class="small">Place SVGs, PNGs, and MP4/GIF files in the repo root or an /assets folder. Use the downloadable pack for web-ready sizes.</div>
+        <h4>Hero Loop</h4>
+        <div class="small">Drop your looping MP4/GIF named <strong>eye_loop.mp4</strong> or <strong>eye_loop.gif</strong> into the repo and reference it where needed. The striped background provides a strong branded texture.</div>
       </div>
     </aside>
 
     <footer>
       Praedicta PRAE — 777,777 • For Those Who See
     </footer>
-  </main>
+  </div>
 
-  <!-- Optional tiny script: enable click-to-play on mobile if autoplay blocked -->
   <script>
+    // optional: if you'd like to inject a looping video into the hero later,
+    // uncomment and adapt the code below. keeps layout clean for the striped style.
+    /*
     (function(){
-      const vid = document.querySelector('video');
-      if(!vid) return;
-      // some browsers block autoplay with sound; ensure muted
-      vid.muted = true;
-      vid.setAttribute('muted','');
-      vid.play().catch(()=>{ /* user interaction required */ });
+      const hero = document.querySelector('.hero');
+      const video = document.createElement('video');
+      video.src = 'eye_loop.mp4';
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+      video.playsInline = true;
+      video.style.position = 'absolute';
+      video.style.inset = '0';
+      video.style.width = '100%';
+      video.style.height = '100%';
+      video.style.objectFit = 'cover';
+      video.style.opacity = '0.95';
+      video.style.pointerEvents = 'none';
+      hero.appendChild(video);
     })();
+    */
   </script>
 </body>
 </html>
